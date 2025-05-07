@@ -1,1 +1,0 @@
-{"version":1,"defects":{"OfxParserTest\\OfxTest::testBuildsBankAccount":4,"OfxParserTest\\OfxTest::testBuildWithouStartEndDates":3},"times":{"OfxParserTest\\OfxTest::testBuildsSignOn":0.002,"OfxParserTest\\OfxTest::testBuildsMultipleBankAccounts":0,"OfxParserTest\\OfxTest::testBuildsBankAccount":0,"OfxParserTest\\OfxTest::testBuildWithouStartEndDates":0}}
