@@ -135,14 +135,14 @@ class Ofx
 
         return $Bank;
     }
-    
+
     private function getStartDate(SimpleXMLElement $xml): string
     {
         $startDate = $xml->STMTRS->BANKTRANLIST->DTSTART;
-        if (empty($startDate)) {
+        if (empty($startDate) && isset($xml->STMTRS->BANKTRANLIST->STMTTRN[0])) {
             $startDate = $xml->STMTRS->BANKTRANLIST->STMTTRN[0]->DTPOSTED;
         }
-  
+
         if (empty($startDate)) {
             throw new \Exception("Failed to get start date");
         }
@@ -153,8 +153,8 @@ class Ofx
     private function getEndDate(SimpleXMLElement $xml): string
     {
         $endDate = $xml->STMTRS->BANKTRANLIST->DTEND;
-        if (empty($endDate)) {
-            $endDate = $xml->STMTRS->BANKTRANLIST->STMTTRN[count($xml->STMTRS->BANKTRANLIST->STMTTRN)-1]->DTPOSTED;
+        if (empty($endDate) && isset($xml->STMTRS->BANKTRANLIST->STMTTRN[0])) {
+            $endDate = $xml->STMTRS->BANKTRANLIST->STMTTRN[count($xml->STMTRS->BANKTRANLIST->STMTTRN) - 1]->DTPOSTED;
         }
 
         if (empty($endDate)) {
