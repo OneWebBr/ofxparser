@@ -68,6 +68,8 @@ class OfxTest extends TestCase
         self::assertEquals('USD', $statement->currency);
         self::assertInstanceOf('DateTime', $statement->startDate);
         self::assertInstanceOf('DateTime', $statement->endDate);
+        self::assertEquals('2007-01-01', $statement->startDate->format('Y-m-d'));
+        self::assertEquals('2007-10-15', $statement->endDate->format('Y-m-d'));
 
         $transactions = $statement->transactions;
         self::assertCount(3, $transactions);
@@ -118,5 +120,20 @@ class OfxTest extends TestCase
 
             self::assertInstanceOf('DateTime', $transaction->date);
         }
+    }
+
+    public function testBuildWithouStartEndDates(): void
+    {
+        $file = dirname(__DIR__).'/fixtures/ofxdata-withoutDates-xml.ofx';
+        $fileData = simplexml_load_string(file_get_contents($file));
+        $Ofx = new Ofx($fileData);
+
+        $bankAccount = $Ofx->bankAccount;
+
+        $statement = $bankAccount->statement;
+        self::assertInstanceOf('DateTime', $statement->startDate);
+        self::assertInstanceOf('DateTime', $statement->endDate);
+        self::assertEquals('2007-03-15', $statement->startDate->format('Y-m-d'));
+        self::assertEquals('2007-07-09', $statement->endDate->format('Y-m-d'));
     }
 }

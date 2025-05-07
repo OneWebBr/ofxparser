@@ -129,11 +129,31 @@ class Ofx
 
         $Bank->statement = new Statement();
         $Bank->statement->currency = $xml->STMTRS->CURDEF;
-        $Bank->statement->startDate = $this->createDateTimeFromStr($xml->STMTRS->BANKTRANLIST->DTSTART);
-        $Bank->statement->endDate = $this->createDateTimeFromStr($xml->STMTRS->BANKTRANLIST->DTEND);
+        $Bank->statement->startDate = $this->createDateTimeFromStr($this->getStartDate($xml));
+        $Bank->statement->endDate = $this->createDateTimeFromStr($this->getEndDate($xml));
         $Bank->statement->transactions = $this->buildTransactions($xml->STMTRS->BANKTRANLIST->STMTTRN);
 
         return $Bank;
+    }
+    
+    private function getStartDate(SimpleXMLElement $xml): string
+    {
+        $startDate = $xml->STMTRS->BANKTRANLIST->DTSTART;
+        if (empty($startDate)) {
+            $startDate = $xml->STMTRS->BANKTRANLIST->STMTTRN[0]->DTPOSTED;
+        }
+
+        return $startDate;
+    }
+
+    private function getEndDate(SimpleXMLElement $xml): string
+    {
+        $endDate = $xml->STMTRS->BANKTRANLIST->DTEND;
+        if (empty($endDate)) {
+            $endDate = $xml->STMTRS->BANKTRANLIST->STMTTRN[count($xml->STMTRS->BANKTRANLIST->STMTTRN)-1]->DTPOSTED;
+        }
+
+        return $endDate;
     }
 
     private function buildTransactions($transactions)
