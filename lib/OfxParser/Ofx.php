@@ -142,6 +142,10 @@ class Ofx
         if (empty($startDate)) {
             $startDate = $xml->STMTRS->BANKTRANLIST->STMTTRN[0]->DTPOSTED;
         }
+  
+        if (empty($startDate)) {
+            throw new \Exception("Failed to get start date");
+        }
 
         return $startDate;
     }
@@ -151,6 +155,10 @@ class Ofx
         $endDate = $xml->STMTRS->BANKTRANLIST->DTEND;
         if (empty($endDate)) {
             $endDate = $xml->STMTRS->BANKTRANLIST->STMTTRN[count($xml->STMTRS->BANKTRANLIST->STMTTRN)-1]->DTPOSTED;
+        }
+
+        if (empty($endDate)) {
+            throw new \Exception("Failed to get end date");
         }
 
         return $endDate;
