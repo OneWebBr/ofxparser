@@ -122,7 +122,7 @@ class OfxTest extends TestCase
         }
     }
 
-    public function testBuildWithouStartEndDates(): void
+    public function testBuildWithoutStartEndDates(): void
     {
         $file = dirname(__DIR__).'/fixtures/ofxdata-withoutDates-xml.ofx';
         $fileData = simplexml_load_string(file_get_contents($file));
