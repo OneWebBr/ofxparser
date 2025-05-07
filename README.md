@@ -1,7 +1,7 @@
 OFX Parser
 =================
 
-## This is a fork of [okonst/ofxparser](https://github.com/okonst/ofxparser)
+## This is a fork of [oriatec/ofxparser](https://github.com/oriatec/ofxparser)
 
 Added support PHP 8
 Remove Investment Support
@@ -18,7 +18,7 @@ It supports multiple Bank Accounts, the required "Sign On" response, and recogni
 Simply require the package using [Composer](https://getcomposer.org/):
 
 ```bash
-$ composer require oriatec/ofxparser
+$ composer require onewebbr/ofxparser
 ```
 
 ## Usage
@@ -47,5 +47,5 @@ Investments support was remove in this version. Please refer to original package
 
 ## Fork & Credits
 
-This is a fork of [okonst/ofxparser](https://github.com/okonst/ofxparser), itself forked of [grimfor/ofxparser](https://github.com/Grimfor/ofxparser) made to be framework independent. The source repo was designed for Symfony 2 framework, so credit should be given where credit due!
+This is a fork of [oriatec/ofxparser](https://github.com/oriatec/ofxparser), itself forked of [okonst/ofxparser](https://github.com/okonst/ofxparser) made to be framework independent. The source repo was designed for Symfony 2 framework, so credit should be given where credit due!
 Heavily refactored by [Oliver Lowe](https://github.com/loweoj) and loosely based on the ruby [ofx-parser by Andrew A. Smith](https://github.com/aasmith/ofx-parser).
